@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<style type="text/css">
+
+		/* Chrome Safari */
+		::-webkit-scrollbar 
+		{
+			display: none; 
+		}
+
+		body
+		{
+			/* Firefox */
+			scrollbar-width: none; 
+
+			width: 400px;
+			height: 100%;
+			margin: 0px auto;
+			/*background-color: #D4D4D4;*/
+			background-color: #D4D4D4;
+
+			font-family: Consolas;
+			font-weight: bold;
+			color: #D4D4D4;
+
+			font-size: 20px;
+		}
+
+		#outer
+		{
+			margin-top: 40px;
+
+			width: 400px;
+			height: 530px;
+
+			border-radius: 20px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+			background-image: linear-gradient(to bottom right, #E3E3E3, #C4C4C4);
+		}
+
+		#container
+		{
+			margin-top: 10px;
+
+			width: 384px;
+			height: 80px;
+			position: absolute;
+			transition: width 0.5s;
+		}
+
+		#inner
+		{
+			width: 80px;
+			height: 80px;
+
+			border-radius: 20px;
+			color: #555555;
+			margin-left: 16px;
+			background-image: linear-gradient(to bottom right, #E3E3E3, #C4C4C4);
+			position: absolute;
+
+			line-height: 80px;
+			text-align: center;
+
+			z-index: 80;
+			transition: margin-left 0.5s, box-shadow 1.0s, color 0.5s;
+		}
+
+		#inner.i1
+		{	
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+			background-image: linear-gradient(to bottom right, #E3E3E3, #C4C4C4);
+
+			transition: transform 0.4s;
+		}
+
+		#inner.i2
+		{
+			box-shadow:  5px  5px 8px #D4D4D4,
+						-5px -5px 8px #D4D4D4;
+		}
+
+		#inner.i3
+		{
+			box-shadow:  5px  5px 8px #D4D4D4,
+						-5px -5px 8px #D4D4D4;
+		}
+
+		#inner.i4
+		{
+			box-shadow:  5px  5px 8px #D4D4D4,
+						-5px -5px 8px #D4D4D4;
+		}
+
+		#direc
+		{
+			width: 270px;
+			height: 80px;
+			border-radius: 20px;
+
+			margin-left: 112px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+			transition: width 0.4s, margin-left 0.4s, opacity 0.4s, color 0.4s;
+
+			line-height: 80px;
+			text-align: center;
+			z-index: 100;
+
+			color: #555555;
+
+			position:absolute;
+
+			opacity: 1;
+		}
+
+		#container:hover
+		{
+			width: 384px;
+		}
+
+
+		#container:hover #inner.i1
+		{
+			transform: rotate(90deg);
+			box-shadow:  5px -5px 8px #9A9A9A,
+						-5px  5px 8px #FFFFFF;
+			/*
+			box-shadow:  8px  8px 10px #9A9A9A,
+						-8px -8px 10px #FFFFFF;
+			*/
+		}
+
+		#container:hover #inner.i2
+		{
+			margin-left: 112px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+		}
+
+		#container:hover #inner.i3
+		{
+			margin-left: 208px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+		}
+
+		#container:hover #inner.i4
+		{
+			margin-left: 304px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+		}
+
+		#container:hover #direc
+		{
+			width: 0px;
+			margin-left: 384px;
+			opacity: 0;
+			color: #D4D4D4;
+		}
+
+
+		.message_box
+		{
+			position: absolute;
+			margin-top: 115px;
+			margin-left: 16px;
+			width: 368px;
+			height: 400px;
+			color: #555555;
+			border-radius: 20px;
+			box-shadow:  5px  5px 8px #9A9A9A,
+						-5px -5px 8px #FFFFFF;
+			background-image: linear-gradient(to bottom right, #E3E3E3, #C4C4C4);
+			transition: box-shadow 0.2s, color 0.2s;
+		}
+
+		button
+		{
+			border: 0px solid #D4D4D4;
+			background-color: transparent;
+			font-family: Consolas;
+			font-weight: bold;
+			font-size: 20px;
+			line-height: 80px;
+			outline: none;
+			color: #555555;
+		}
+
+		.cube
+		{
+			margin-left: 10px;
+			margin-top: 8px;
+			width: 60px;
+			height: 16px;
+			border-radius: 5px;
+
+			box-shadow:  2px  2px 3px #858585 inset,
+						-2px -2px 3px #EDEDED inset;
+		}
+
+		#cube1
+		{
+			/*27AE60*/
+			background-image: linear-gradient(to bottom right, #078E40, #47CE80);
+		}
+		#cube2
+		{
+			/*2980B9*/
+			background-image: linear-gradient(to bottom right, #096099, #49A0D9);
+		}
+		#cube3
+		{
+			/*E67E22*/
+			background-image: linear-gradient(to bottom right, #C65E02, #FF9E42);
+		}
+
+		a
+		{
+			color: #555555;
+			font-weight: bold;
+			text-decoration: none;
+		}
+	</style>
+
+	<script language="jscript">
+		function down2()
+		{
+			document.getElementsByClassName("i2")[0].style.boxShadow="5px  5px 8px #9A9A9A inset, -5px -5px 8px #FFFFFF inset";
+		}
+
+		function up2()
+		{
+		 	document.getElementsByClassName("i2")[0].style.boxShadow=""; 
+		}
+
+		function down3()
+		{
+		 	document.getElementsByClassName("i3")[0].style.boxShadow="5px  5px 8px #9A9A9A inset, -5px -5px 8px #FFFFFF inset";
+		}
+
+		function up3()
+		{
+		 	document.getElementsByClassName("i3")[0].style.boxShadow="";
+		}
+
+		function down4()
+		{
+		 	document.getElementsByClassName("i4")[0].style.boxShadow="5px  5px 8px #9A9A9A inset, -5px -5px 8px #FFFFFF inset";
+		}
+
+		function up4()
+		{
+		 	document.getElementsByClassName("i4")[0].style.boxShadow="";
+		}
+
+		function click2()
+		{
+		 	var tmp = document.getElementsByClassName("message_box");
+		 	var i;
+		 	for(i=0; i<tmp.length; i++)
+		 	{
+		 		tmp[i].style.color="#D4D4D4";
+		 		tmp[i].style.boxShadow="5px  5px 8px #D4D4D4, -5px -5px 8px #D4D4D4";
+		 	}
+
+		 	setTimeout(function(){
+		 		document.getElementById("message1").style.visibility="visible";
+				document.getElementById("message2").style.visibility="hidden";
+				document.getElementById("message3").style.visibility="hidden";
+				document.getElementById("direc").innerHTML="Biography";
+		 	}, 200);
+
+			setTimeout(function(){
+				var tmp = document.getElementsByClassName("message_box");
+		 		var i;
+		 		for(i=0; i<tmp.length; i++)
+		 		{
+		 			tmp[i].style.color="#555555";
+		 			tmp[i].style.boxShadow="5px  5px 8px #9A9A9A, -5px -5px 8px #FFFFFF";
+		 		}
+			}, 200);  
+		}
+
+		function click3()
+		{
+		 	var tmp = document.getElementsByClassName("message_box");
+		 	var i;
+		 	for(i=0; i<tmp.length; i++)
+		 	{
+		 		tmp[i].style.color="#D4D4D4";
+		 		tmp[i].style.boxShadow="5px  5px 8px #D4D4D4, -5px -5px 8px #D4D4D4";
+		 	}
+
+		 	setTimeout(function(){
+		 		document.getElementById("message1").style.visibility="hidden";
+				document.getElementById("message2").style.visibility="visible";
+				document.getElementById("message3").style.visibility="hidden";
+				document.getElementById("direc").innerHTML="Publication";
+		 	}, 200);
+
+			setTimeout(function(){
+				var tmp = document.getElementsByClassName("message_box");
+		 		var i;
+		 		for(i=0; i<tmp.length; i++)
+		 		{
+		 			tmp[i].style.color="#555555";
+		 			tmp[i].style.boxShadow="5px  5px 8px #9A9A9A, -5px -5px 8px #FFFFFF";
+		 		}
+			}, 200); 
+		}
+
+		function click4()
+		{
+		 	var tmp = document.getElementsByClassName("message_box");
+		 	var i;
+		 	for(i=0; i<tmp.length; i++)
+		 	{
+		 		tmp[i].style.color="#D4D4D4";
+		 		tmp[i].style.boxShadow="5px  5px 8px #D4D4D4, -5px -5px 8px #D4D4D4";
+		 	}
+
+		 	setTimeout(function(){
+		 		document.getElementById("message1").style.visibility="hidden";
+				document.getElementById("message2").style.visibility="hidden";
+				document.getElementById("message3").style.visibility="visible";
+				document.getElementById("direc").innerHTML="Project";
+		 	}, 200);
+
+			setTimeout(function(){
+				var tmp = document.getElementsByClassName("message_box");
+		 		var i;
+		 		for(i=0; i<tmp.length; i++)
+		 		{
+		 			tmp[i].style.color="#555555";
+		 			tmp[i].style.boxShadow="5px  5px 8px #9A9A9A, -5px -5px 8px #FFFFFF";
+		 		}
+			}, 200);		
+		}
+	</script>	
+</head>
+
+<body>
+	<div id="outer" class="design">
+	<div id="container">
+		<div id="inner" class="i1" style="z-index: 100;"><img src="./index_files/opt2.svg" width="50px" height="50px" style="margin-top: 15px;"></div>
+
+		<!--<div id="inner" class="i1" style="z-index: 100;">
+			<div class="cube" id="cube1"></div>
+			<div class="cube" id="cube2"></div>
+			<div class="cube" id="cube3"></div>
+		</div>-->
+
+		<div id="inner" class="i2" style="z-index: 75;"><button type="button" onmousedown="down2()" onmouseup="up2()" onclick="click2()">Bio</button></div>
+		<div id="inner" class="i3" style="z-index: 50;"><button type="button" onmousedown="down3()" onmouseup="up3()" onclick="click3()">Pub</button></div>
+		<div id="inner" class="i4" style="z-index: 25;"><button type="button" onmousedown="down4()" onmouseup="up4()" onclick="click4()">Pro</button></div>
+		<div id="direc" class="d1">Biography</div>
+	</div>
+
+	<div class="message_box" id="message1" style="visibility: visible; color: rgb(85, 85, 85); box-shadow: rgb(154, 154, 154) 5px 5px 8px, rgb(255, 255, 255) -5px -5px 8px;"> 
+		<p style="margin: 20px 22px; font-weight: normal; font-size:15px; line-height: 135%;">
+			<span style="font-weight: bold; font-size: 18px;">Profile  ------------------------</span><br>
+			Junjie Yang obtained his Bachelor's and Master's Degree under the supervision of Prof. Huang Kai in Sun Yat-Sen University, China. Currently He is persuing his Dr.rer.Nat in the Medical Autonomy and Precision Surgery (MAPS) laboratory with Dr.-Ing Ali Nasseri and Prof. Nassir Navab in Technical University of Munich, Germany. His research interests include robotic medical autonomy and AI therapies.<br>	
+			<br>
+			<span style="font-weight: bold; font-size: 18px;">Contact  ------------------------</span><br>
+			Email: <a href="mailto:junjie.yang@tum.de">junjie.yang@tum.de</a>
+			<br>
+			Room: 43.3.5 (3.0G)
+			<br>
+			Address: <a href="https://goo.gl/maps/HS3YXiXq5K1D76c39">Troger Street 32, 81675 Munich</a>
+		</p>
+	</div>
+
+	<div class="message_box" id="message2" style="visibility: hidden; color: rgb(85, 85, 85); box-shadow: rgb(154, 154, 154) 5px 5px 8px, rgb(255, 255, 255) -5px -5px 8px;">
+		<p style="margin: 10px 16px; font-weight: normal; font-size:14px;">
+			[C] "<a href="https://doi.org/10.48550/arxiv.2111.15373">ColibriDoc: An Eye-in-Hand Autonomous Trocar Docking System</a>" in ICRA2022.<br><br>
+			[J] "<a href="https://doi.org/10.1016/j.sysarc.2021.102119">Efficient runtime slack management for EDF-VD-based mixed-criticality scheduling</a>" in JSA2021.<br><br>
+			[C] "<a href="https://doi.ieeecomputersociety.org/10.1109/ICECCS2018.2018.00026">Design Verification and Validation for Reliable Safety-Critical Autonomous Control Systems</a>" in ICECCS2018.<br><br>
+			[C] "<a href="https://doi.org/10.1007/978-3-319-95582-7_17">Resource-Aware Design for Reliable Autonomous Applications with Multiple Periods</a>" in FM2018.<br><br>
+			[C] "<a href="https://doi.org/10.1109/IVS.2018.8500701">LiSeg: Lightweight Road-object Semantic Segmentation In 3D LiDAR Scans For Autonomous Driving</a>" in IV2017.<br><br>
+			[C] "<a href="https://doi.org/10.1007/978-981-13-1026-3_9">Formal Collision Avoidance Analysis for Rigorous Building of Autonomous Marine Vehicles</a>" in ETSC2017.
+		</p>
+	</div>
+
+	<div class="message_box" id="message3" style="visibility: hidden; color: rgb(85, 85, 85); box-shadow: rgb(154, 154, 154) 5px 5px 8px, rgb(255, 255, 255) -5px -5px 8px;">
+		<p style="margin: 16px 16px; font-weight: normal; font-size:14px; line-height: 140%;">
+			<span style="font-weight: bold; font-size: 18px;">Design of Ophthalmic Robot  ------</span><br>
+			<span style="font-style:italic; font-size: 14px; color:rgb(  0, 204,   0);">(Open Jobs: 2)</span>
+			<br>
+			We are designing an ophthalmic robot as well as its frame in the surgical scenario. Currently there are two major problems to be solved: visual-based status recognition, and kinematic calibration during its RCM movement. Our target is to implement a RCM-enabled robot with its surgical precision exceeding that of human surgeons.
+			<br>
+			<span style="font-weight: bold; font-size: 18px;">Medical AI Application  ----------</span><br>
+			<span style="font-style:italic; font-size: 14px; color:rgb(255, 128,   0);">(Open Jobs: 0)</span>
+			<br>
+			We are exploring AI-based medical applications utilizing our RCM-enabled robot. One paper has been accepted in ICRA 2022.
+			<br>
+			<span style="font-weight: bold; font-size: 18px;">Surgical Data Science  -----------</span><br>
+			<span style="font-style:italic; font-size: 14px; color:rgb(255, 128,   0);">(Open Jobs: 0)</span>
+			<br>
+			Surgical tool detection with HoloLens.
+			
+		</p>
+	</div>
+	</div>
+
+</body></html>
